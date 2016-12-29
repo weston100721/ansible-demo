@@ -1,0 +1,26 @@
+---
+  # this is a comment.
+
+
+  # 字符串用双引号或不用
+  this is a string
+  "this is a string"
+
+  # boolean类型：True False
+  True
+  False
+
+  # 列表
+  - one
+  - two
+  - three
+
+  # 字典
+  name: hello
+  age: 100
+  addr: china
+
+  # 折行
+  addr: china >
+  changsha.
+  age: 33
