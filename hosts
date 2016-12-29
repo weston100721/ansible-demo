@@ -1,0 +1,45 @@
+
+[cassandra]
+test1.example.com
+test2.example.com
+test3.example.com
+
+[elasticsearch]
+test4.example.com
+test5.example.com
+test6.example.com
+
+[server]
+server1 ansible_ssh_host=14.155.91.5
+server2 ansible_ssh_host=14.155.91.6
+server3 ansible_ssh_host=14.155.91.8
+
+# 指定web1.example.com到web20.example.com的域名
+[web]
+web[1:20].example.com
+
+# 指定web01.example.com到web20.example.com的域名
+[web1]
+web[01-20].example.com
+
+# 指定weba.example.com到webt.example.com的域名
+[web2]
+web[a-t].example.com
+
+# java这个群组包括cassandra、elasticsearch和server
+[java:children]
+cassandra
+elasticsearch
+server
+
+# 针对所有群组都有效的变量。
+[all:vars]
+ansible_ssh_user=root
+
+# 只针对java群组有效的变量。
+[java:vars]
+jdk-version=1.8
+
+# 只针对server群组有效的变量。
+[server:vars]
+ansible_ssh_pass=123
