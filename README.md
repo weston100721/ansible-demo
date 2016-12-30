@@ -16,6 +16,7 @@ ansible host -i hosts -m ping
 ```
 
 配置文件`ansible.cfg`的读取顺序：
+
 1. ANSIBLE_CONFIG环境变量所指的位置
 2. 当前目录的`ansible.cfg`
 3. `~/.ansible.cfg`(用户目录下的`ansible.cfg`)
