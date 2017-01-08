@@ -1,9 +1,9 @@
 # ansible-demo
 ansible learning
 
-## 1. 安装
+## 安装
 
-```shell
+```
 sudo pip install ansible
 
 sudo yum install ansible
@@ -14,6 +14,8 @@ sudo yum install ansible
 ansible all -m ping
 ansible host -i hosts -m ping
 ```
+
+# 1. ansible.cfg
 
 配置文件`ansible.cfg`的读取顺序：
 
@@ -89,3 +91,17 @@ ansible all -m setup -a 'filter=ansible_eth*'
 - JSON格式
 
 以这种方式加载的fact是key为ansible_local的特殊变量。
+
+# 5. roles
+## 5.1 role的优先级
+
+- 与playbook并列的roles目录。
+- `/etc/ansible/roles`。
+- ansible.cfg中指定的位置，如下所示。
+
+```
+[defaults]
+roles_path = ~/ansible_roles
+```
+
+可以通过`ANSIBLE_ROLES_PATH`环境变量来覆盖这个设置。

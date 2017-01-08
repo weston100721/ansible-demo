@@ -1,4 +1,13 @@
 
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character 以'#'开头的是注释。
+#   - Blank lines are ignored 空行被忽略。
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+
 [cassandra]
 test1.example.com
 test2.example.com
