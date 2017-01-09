@@ -1,4 +1,3 @@
-
 # It should live in /etc/ansible/hosts
 #
 #   - Comments begin with the '#' character 以'#'开头的是注释。
@@ -7,6 +6,10 @@
 #   - You can enter hostnames or ip addresses
 #   - A hostname/ip can be a member of multiple groups
 
+myserver ansible_ssh_host=127.0.0.1 ansible_connection=local
+
+[testvars]
+myserver
 
 [cassandra]
 test1.example.com

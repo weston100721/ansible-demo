@@ -1,0 +1,4 @@
+---
+  - name: show test_vars value
+    debug: msg="the test_vars is {{ test_vars }}"
+    when: test_vars is defined
