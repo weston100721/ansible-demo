@@ -5,7 +5,6 @@ ansible learning
 
 ```
 sudo pip install ansible
-
 sudo yum install ansible
 ```
 
