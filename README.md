@@ -99,8 +99,6 @@ ansible all -m setup -a 'filter=ansible_eth*'
 5. group_vars/中的变量
 6. roles/xxx/defaults/main.yml 中的变量。
 
---extra-vars "version=1.23.45 other_variable=foo"
-
 # 5. roles
 ## 5.1 role的优先级
 
