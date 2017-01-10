@@ -93,10 +93,14 @@ ansible all -m setup -a 'filter=ansible_eth*'
 以这种方式加载的fact是key为ansible_local的特殊变量。
 
 ## 4.5 变量优先级
-1. roles/xxx/var/main.yml
-2. playbook中的vars
-3. host_vars/hostname.yml中的变量
-4. group_vars/中的变量
+1. ansible-playbook -i hostsforvar getvar.yml --extra-vars "test_vars=line"
+2. roles/xxx/var/main.yml
+3. playbook中的vars
+4. host_vars/hostname.yml中的变量
+5. group_vars/中的变量
+6. roles/xxx/defaults/main.yml 中的变量。
+
+--extra-vars "version=1.23.45 other_variable=foo"
 
 # 5. roles
 ## 5.1 role的优先级
