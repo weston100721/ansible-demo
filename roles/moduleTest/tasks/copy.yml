@@ -1,0 +1,3 @@
+---
+  - name: "copy file to {{ filepath }}"
+    copy: src=foo.conf dest={{ filepath }} owner={{ user }} group={{ user }} mode=0644  backup=yes

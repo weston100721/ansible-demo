@@ -1,0 +1,4 @@
+---
+  - include: file.yml
+  - include: copy.yml
+# tasks file for ansible-demo/roles/moduleTest

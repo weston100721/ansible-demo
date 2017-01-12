@@ -27,16 +27,17 @@ server2 ansible_ssh_host=14.155.91.6
 server3 ansible_ssh_host=14.155.91.8
 
 # 指定web1.example.com到web20.example.com的域名
-[web]
-web[1:20].example.com
+
+# [web4]
+# web[1:20].example.com
 
 # 指定web01.example.com到web20.example.com的域名
-[web1]
-web[01-20].example.com
+# [web1]
+# web[01-20].example.com
 
 # 指定weba.example.com到webt.example.com的域名
-[web2]
-web[a-t].example.com
+# [web2]
+# web[a-t].example.com
 
 # java这个群组包括cassandra、elasticsearch和server
 [java:children]
