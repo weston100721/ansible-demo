@@ -1,8 +1,0 @@
----
-  - name: 'test_vars priortiy'
-    hosts: testvars
-    vars:
-      #test_vars: "getvar.yml"
-
-    roles:
-      - vartest

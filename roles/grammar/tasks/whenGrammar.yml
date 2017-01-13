@@ -1,0 +1,30 @@
+---
+- name: "when granmmar"
+  debug: msg="when grammar"
+  when: ansible_os_family == "Debian"
+
+# tasks file for roles/grammar
+#- command: /bin/false
+#  register: result
+#  ignore_errors: True
+
+#- command: /bin/something
+#  when: result|failed
+
+#- command: /bin/something_else
+#  when: result|success
+
+#- command: /bin/still/something_else
+#  when: result|skipped
+
+
+# 如果一个变量不存在,你可以使用Jinja2的`defined`命令跳过或略过.例如:
+- shell: echo "I've got '{{ noexsit }}' and am not afraid to use it!"
+  when: foo is defined
+
+- fail: msg="Bailing out. this play requires 'noexsit'"
+  when: bar is defined
+
+- debug: msg="echo {{ item }}"
+  with_items: [ 0, 2, 4, 6, 8, 10 ]
+  when: item > 5

@@ -1,0 +1,82 @@
+---
+
+- name: add several users
+  debug: msg="name is {{ item }}"
+  with_items:
+     - testuser1
+     - testuser2
+
+# 使用 ‘with_items’ 用于迭代的条目类型不仅仅支持简单的字符串列表.如果你有一个哈希列表,那么你可以用以下方式来引用子项:
+- name: add several users
+  debug: msg="name is {{ item.name }}, groups is {{ item.groups }}"
+  with_items:
+    - { name: 'testuser1', groups: 'wheel' }
+    - { name: 'testuser2', groups: 'root' }
+
+
+- name: "with_nested 语法使用"
+  debug: msg="name is {{ item[0] }} ; priv is {{ item[1] }}. ALL append_privs=yes password=foo"
+  with_nested:
+    - [ 'alice', 'bob' ]
+    - [ 'clientdb', 'employeedb', 'providerdb' ]
+
+- name: Print phone records
+  vars:
+    users:
+      alice:
+        name: Alice Appleworth
+        telephone: 123-456-7890
+      bob:
+        name: Bob Bananarama
+        telephone: 987-654-3210
+  debug: msg="User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
+  with_dict: "{{users}}"
+
+    # with_fileglob 可以以非递归的方式来模式匹配单个目录中的文件.如下面所示
+- name: "with_fileglob 可以以非递归的方式来模式匹配单个目录中的文件.如下面所示:"
+  file: dest=/home/zhaoliang/ansibletest state=directory
+
+- copy: src={{ item }} dest=/home/zhaoliang/ansible-test owner=zhaoliang mode=600
+  with_fileglob:
+   - /home/zhaoliang/github/ansible-role-nginx/templates/*
+
+  # 如果你想得到’(a, 1)’和’(b, 2)’之类的集合.可以使用’with_together’:
+#- name: "如果你想得到’(a, 1)’和’(b, 2)’之类的集合.可以使用’with_together’"
+#  vars:
+#    alpha: [ 'a', 'b', 'c', 'd' ]
+#    numbers:  [ 1, 2, 3, 4 ]
+#  debug: msg="{{ item.0 }} and {{ item.1 }}"
+#  with_together:
+#    - "{{alpha}}"
+#    - "{{numbers}}"
+
+
+# with_sequence 可以以升序数字顺序生成一组序列.你可以指定起始值、终止值,以及一个可选的步长值.
+# 指定参数时也可以使用key=value这种键值对的方式.如果采用这种方式,’format’是一个可打印的字符串.
+# 数字值可以被指定为10进制,16进制(0x3f8)或者八进制(0600).负数则不受支持.请看以下示例:
+    # create groups
+  #  - group: name=evens state=present
+  #  - group: name=odds state=present
+
+    # create some test users
+- debug: msg="name is {{ item }}"
+  with_sequence: start=0 end=32 format=testuser%02x
+
+    # create a series of directories with even numbers for some reason
+- debug: msg="dest is /vars/stuff/{{ item }} state is directory"
+  with_sequence: start=4 end=16 stride=2
+
+    # a simpler way to use the sequence plugin
+    # create 4 groups
+- name: "with_sequence: count=4"
+  debug: msg="name is group{{ item }} state is present"
+  with_sequence: count=4
+
+ # ‘random_choice’功能可以用来随机获取一些值.它并不是负载均衡器(已经有相关的模块了).它有时可以用作一个简化版的负载均衡器,比如作为条件判断:
+- name: "with_random_choice"
+  debug: msg={{ item }}
+  with_random_choice:
+    - "go through the door"
+    - "drink from the goblet"
+    - "press the red button"
+    - "do nothing"
