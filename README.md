@@ -92,7 +92,7 @@ ansible all -m setup -a 'filter=ansible_eth*'
 以这种方式加载的fact是key为ansible_local的特殊变量。
 
 ## 4.5 变量优先级
-1. ansible-playbook -i hostsforvar getvar.yml --extra-vars "test_vars=line"
+1. ansible-playbook -i hostsforvar getvar.yml --extra-vars "test_vars=line" 额外的变量设置为`键=值`、`YAML` 或 `JSON`
 2. roles/xxx/var/main.yml
 3. playbook中的vars
 4. host_vars/hostname.yml中的变量
@@ -112,3 +112,44 @@ roles_path = ~/ansible_roles
 ```
 
 可以通过`ANSIBLE_ROLES_PATH`环境变量来覆盖这个设置。
+
+## 6 测试环境搭建
+
+安装`vagrant_1.9.1_x86_64.deb`和`virtualbox-5.1_5.1.12-112440-Ubuntu-xenial_amd64.deb`
+具体安装过程可以参考[vagrantup](https://www.vagrantup.com/docs/installation/) 和[virtualbox](https://www.virtualbox.org/wiki/Documentation)官网。
+
+
+```shell
+vagrant init ubuntu/trusty64
+vagrant up
+```
+
+Vagrantfile文件配置：
+
+```
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  # config.vm.box = "ubuntu/trusty64"
+  config.ssh.insert_key = false
+  config.vm.define "vagrant1" do |vagrant1|
+    vagrant1.vm.box = "ubuntu/trusty64"
+    vagrant1.vm.network "forwarded_port", guest: 80, host: 8080
+    vagrant1.vm.network "forwarded_port", guest: 443, host: 8443
+  end
+  config.vm.define "vagrant2" do |vagrant2|
+    vagrant2.vm.box = "ubuntu/trusty64"
+    vagrant2.vm.network "forwarded_port", guest: 80, host: 8081
+    vagrant2.vm.network "forwarded_port", guest: 443, host: 8444
+  end
+  config.vm.define "vagrant3" do |vagrant3|
+    vagrant3.vm.box = "ubuntu/trusty64"
+    vagrant3.vm.network "forwarded_port", guest: 80, host: 8082
+    vagrant3.vm.network "forwarded_port", guest: 443, host: 8445
+  end
+end
+```
