@@ -1,0 +1,7 @@
+{
+  "thisServer":[
+    "vagrant1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_pass=vagrant ansible_ssh_user=vagrant",
+    "vagrant2 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 ansible_ssh_pass=vagrant ansible_ssh_user=vagrant",
+    "vagrant3 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201 ansible_ssh_pass=vagrant ansible_ssh_user=vagrant"
+  ]
+}

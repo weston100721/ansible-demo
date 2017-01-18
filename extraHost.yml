@@ -1,0 +1,5 @@
+---
+  - name: "var read"
+    hosts: "{{ thisServer }}"
+    roles:
+      - varread
