@@ -19,6 +19,12 @@ ansible-playbook extraHost.yml --extra-vars "@hosts.yml"
 ansible-playbook extraHost.yml --extra-vars "@hosts.json"
 ```
 
+下载文件
+
+```
+ansible-playbook download.yml
+```
+
 
 # 1. ansible.cfg
 
