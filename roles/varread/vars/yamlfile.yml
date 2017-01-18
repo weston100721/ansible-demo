@@ -1,0 +1,17 @@
+---
+  yamlFileType: yaml
+  yamlFileContent:
+    - content1
+    - content2
+    - content3
+
+  users:
+    alice:
+      name: Alice Appleworth
+      telephone: 123-456-7890
+    bob:
+      name: Bob Bananarama
+      telephone: 987-654-3210
+
+  alpha: [ 'a', 'b', 'c', 'd' ]
+  numbers:  [ 1, 2, 3, 4 ]

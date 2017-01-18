@@ -1,0 +1,36 @@
+---
+  - include_vars: jsonfile.json
+  - include_vars: yamlfile.yml
+
+  - name: "read var from json file"
+    debug: msg="value is {{ jsonFileType }} , content is {{jsonFileContent.content1}},array is {{ jsonArray[0] }} "
+
+  - name: "read var from json file"
+    debug: msg="value is {{ item }}"
+    with_items: "{{ jsonFileContent }}"
+
+  - name: Print phone records from json
+    debug: msg="User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
+    with_dict: "{{users1}}"
+
+  - name: "from json"
+    debug: msg="{{ item.0 }} and {{ item.1 }}"
+    with_together:
+      - "{{ alpha1 }}"
+      - "{{ numbers1 }}"
+
+  - name: "read var from yaml file test1"
+    debug: msg="value is {{ yamlFileType }}, content is {{ yamlFileContent }}, array is {{ yamlFileContent[0] }} "
+
+  - name: "read var from yaml file test2"
+    debug: msg="value is {{ yamlFileType }}, content is {{ item }}"
+    with_items: "{{ yamlFileContent }}"
+
+  - name: Print phone records
+    debug: msg="User {{ item.key }} is {{ item.value.name }} ({{ item.value.telephone }})"
+    with_dict: "{{users}}"
+
+  - debug: msg="{{ item.0 }} and {{ item.1 }}"
+    with_together:
+      - "{{alpha}}"
+      - "{{numbers}}"

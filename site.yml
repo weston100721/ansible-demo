@@ -1,14 +1,19 @@
 ---
-  - name: 'test_vars priortiy'
-    hosts: testvars
-    vars:
-      #test_vars: "getvar.yml"
-
-    roles:
-      - vartest
+#  - name: 'test_vars priortiy'
+#    hosts: testvars
+#    vars:
+#      #test_vars: "getvar.yml"
+#
+#    roles:
+#      - vartest
 
 #  - name: "grammar learning"
 #    hosts: test
 #
 #    roles:
 #      - grammar
+
+  - name: "var read"
+    hosts: "{{ thisServer }}"
+    roles:
+      - varread

@@ -8,11 +8,17 @@ sudo pip install ansible
 sudo yum install ansible
 ```
 
-测试
+## 测试
 ```shell
 ansible all -m ping
 ansible host -i hosts -m ping
 ```
+执行的hosts可以通过外部变量传递
+```
+ansible-playbook extraHost.yml --extra-vars "@hosts.yml"
+ansible-playbook extraHost.yml --extra-vars "@hosts.json"
+```
+
 
 # 1. ansible.cfg
 
@@ -92,12 +98,22 @@ ansible all -m setup -a 'filter=ansible_eth*'
 以这种方式加载的fact是key为ansible_local的特殊变量。
 
 ## 4.5 变量优先级
-1. ansible-playbook -i hostsforvar getvar.yml --extra-vars "test_vars=line" 额外的变量设置为`键=值`、`YAML` 或 `JSON`
+1. ansible-playbook -i hostsforvar getvar.yml --extra-vars "test_vars=line"
 2. roles/xxx/var/main.yml
 3. playbook中的vars
 4. host_vars/hostname.yml中的变量
 5. group_vars/中的变量
 6. roles/xxx/defaults/main.yml 中的变量。
+
+## 4.6 extra-vars的外部变量的传递语法
+
+额外的变量设置为`键=值`、`YAML` 或 `JSON`，例如`--extra-vars "@some_file.json"`
+```
+--extra-vars "test_vars=line"
+--extra-vars '{"pacman":"mrs","ghosts":["inky","pinky","clyde","sue"]}'
+--extra-vars "@some_file.json"
+--extra-vars "@some_file.yml"
+```
 
 # 5. roles
 ## 5.1 role的优先级
@@ -112,6 +128,12 @@ roles_path = ~/ansible_roles
 ```
 
 可以通过`ANSIBLE_ROLES_PATH`环境变量来覆盖这个设置。
+
+## 5.2 新建一个role
+
+```
+ansible-galaxy init --offline roles/{{ name }}
+```
 
 ## 6 测试环境搭建
 

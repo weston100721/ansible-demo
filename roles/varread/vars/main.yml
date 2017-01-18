@@ -1,0 +1,6 @@
+---
+#  include_vars: jsonfile.json
+#  - include_vars: yamlfile.yml
+# vars file for roles/varread
+#  - include_vars: jsonfile.json
+#  - include_vars: yamlfile.yml

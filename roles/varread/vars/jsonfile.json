@@ -1,0 +1,21 @@
+{
+  "jsonFileType": "json",
+  "jsonFileContent": {
+    "content1": "test json1",
+    "content2": "test json2",
+    "content3": "test json3"
+  },
+  "jsonArray": ["array0","array1","arra2"],
+  "users1": {
+    "alice":{
+      "name": "Alice Appleworth",
+      "telephone": "123-456-7890"
+    },
+    "bob":{
+      "name": "Bob Bananarama",
+      "telephone": "987-654-3210"
+    }
+  },
+  "alpha1": ["a","b","c","d"],
+  "numbers1":[1,2,3,4]
+}
