@@ -1,3 +1,8 @@
 ---
   - name: "copy file to {{ filepath }}"
     copy: src=foo.conf dest={{ filepath }} owner={{ user }} group={{ user }} mode=0644  backup=yes
+
+  - name: "copy all files from {{ filepath }} to {{ filepath2 }}"
+    copy: src={{ item }} dest={{ filepath2 }} owner=zhaoliang mode=755
+    with_fileglob:
+      - "{{ filepath }}/*"

@@ -1,4 +1,5 @@
 ---
-  filepath: /home/zhaoliang/github/test
+  filepath: /home/zhaoliang/github/test/module
+  filepath2: /home/zhaoliang/github/test/module2
   user: zhaoliang
 # defaults file for ansible-demo/roles/moduleTest

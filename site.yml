@@ -13,7 +13,12 @@
 #    roles:
 #      - grammar
 
-  - name: "var read"
-    hosts: "{{ thisServer }}"
+#  - name: "var read"
+#    hosts: "{{ thisServer }}"
+#    roles:
+#      - varread
+#
+  - name: test module
+    hosts: testvars
     roles:
-      - varread
+      - moduleTest

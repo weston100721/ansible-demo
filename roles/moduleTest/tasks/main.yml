@@ -1,4 +1,5 @@
 ---
   - include: file.yml
   - include: copy.yml
+  - include: geturl.yml
 # tasks file for ansible-demo/roles/moduleTest
