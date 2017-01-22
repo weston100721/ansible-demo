@@ -1,0 +1,73 @@
+user  {{ nginx.config.user }};
+
+error_log  {{ nginx.config.error_log }};
+pid        {{ nginx.config.pid }};
+
+worker_processes  {{ nginx.config.worker_processes }};
+
+events {
+    worker_connections  {{ nginx.config.events.worker_connections }};
+    multi_accept {{ nginx.config.events.multi_accept }};
+}
+
+http {
+    include       {{ nginx.config.http.include }};
+    default_type  application/octet-stream;
+
+    server_names_hash_bucket_size {{ nginx.config.http.server_names_hash_bucket_size }};
+
+    client_max_body_size {{ nginx.config.http.client_max_body_size }};
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  {{ nginx.config.http.access_log }};
+
+    sendfile        {{ nginx.config.http.sendfile }};
+    tcp_nopush      {{ nginx.config.http.tcp_nopush }};
+    tcp_nodelay     {{ nginx.config.http.tcp_nodelay }};
+
+    keepalive_timeout  {{ nginx.config.http.keepalive_timeout }};
+    keepalive_requests {{ nginx.config.http.keepalive_requests }};
+
+    gzip  {{ nginx.config.http.gzip }};
+
+{# upstream handler #}
+{% if nginx.config.http.upstream is defined -%}
+{% for key, value in nginx.config.http.upstream.iteritems() %}
+    upstream {{ key }} {
+{% for k, v in value.iteritems() -%}
+{% if k == 'servers' -%}
+{% for ip in v %}
+          server {{ ip }};
+{% endfor -%}
+{% else %}
+          {{ k }} {{ v }};
+{% endif -%}
+{% endfor %}
+    }
+
+{% endfor -%}
+{% endif -%}
+
+{%- if nginx.config.http.server is defined %}
+{%- for item in nginx.config.http.server %}
+    server {
+{% for key,value in item.iteritems() %}
+{% if key == 'location' %}
+{% for k1 ,v1 in value.iteritems() %}
+        location {{ k1 }} {
+{% for k2, v2 in v1.iteritems() %}
+            {{ k2 }}  {{ v2 }};
+{% endfor %}
+        }
+{% endfor %}
+{% else %}
+        {{ key }}  {{ value }};
+{% endif %}
+{% endfor %}
+    }
+{% endfor -%}
+{% endif -%}
+}

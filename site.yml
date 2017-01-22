@@ -18,7 +18,12 @@
 #    roles:
 #      - varread
 #
-  - name: test module
+#  - name: test module
+#    hosts: testvars
+#    roles:
+#      - moduleTest
+
+  - name: templateTest
     hosts: testvars
     roles:
-      - moduleTest
+      - templateTest
