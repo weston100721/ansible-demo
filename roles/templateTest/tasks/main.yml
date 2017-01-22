@@ -5,7 +5,7 @@
 
   - name: Copy nginx configuration in place.
     template:
-      src: nginx.conf.j2
+      src: mgnginx.conf.j2
       dest: "{{ tempfile }}/nginx.conf"
       owner: zhaoliang
       group: zhaoliang
